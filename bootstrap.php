@@ -13,7 +13,7 @@ function render($filename, $parameters)
 $config = new \Doctrine\DBAL\Configuration();
 
 $connectionParams = [
-    'dbname' => 'practice',
+    'path' => 'practice.db',
     'driver' => 'pdo_sqlite',
 ];
 
