@@ -1,0 +1,8 @@
+body {
+    background: #efefef url(img/gray_jean.png);
+}
+
+#content {
+    width: 800px;
+    margin: auto;
+}
