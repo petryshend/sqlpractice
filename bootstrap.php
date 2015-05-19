@@ -2,7 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-function render($filename, $parameters)
+function render($filename, $parameters = [])
 {
     $loader = new Twig_Loader_Filesystem('templates');
     $twig = new Twig_Environment($loader);
