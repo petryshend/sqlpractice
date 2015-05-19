@@ -3,5 +3,23 @@
 {% block body %}
     <div class="col_12">
         <h2>SQL Practice</h2>
+        {% for ex in exercises %}
+            <p>{{ ex.task }}</p>
+            <table class="striped">
+                <thead>
+                    {% for key in ex.rows[0]|keys %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for row in ex.rows %}
+                        <tr>
+                            <td>{{ row.Name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+        {% endfor %}
     </div>
 {% endblock %}
