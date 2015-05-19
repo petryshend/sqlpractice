@@ -3,7 +3,7 @@
 {% block body %}
     <div class="col_12">
         <h2>SQL Practice</h2>
-        {% for ex in exercises %}
+        {% for ex in exercises|reverse %}
             <p>{{ ex.task }}</p>
             <table class="striped">
                 <thead>
