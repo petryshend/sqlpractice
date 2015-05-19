@@ -171,5 +171,107 @@ $exercises[] = $ex;
 
 /******************************************/
 
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT P.Code, P.Name, P.Price, M.Name as "Manufacturer"
+    FROM Products P JOIN Manufacturers M
+        ON P.Manufacturer = M.Code
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select all the data from the products, including all the data for each product\'s manufacturer.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT P.Name, P.Price, M.Name AS "Manufacturer"
+    FROM Products P JOIN Manufacturers M
+    ON P.Manufacturer = M.Code
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the product name, price, and manufacturer name of all the products.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT AVG(Price), Manufacturer
+    FROM Products
+    GROUP BY Manufacturer
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the average price of each manufacturer\'s products, showing only the manufacturer\'s code.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT AVG(Price), M.Name
+    FROM Products P JOIN Manufacturers M
+    ON P.Manufacturer = M.Code
+    GROUP BY Manufacturer
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the average price of each manufacturer\'s products, showing the manufacturer\'s name.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT AVG(Price), M.Name
+    FROM Products P JOIN Manufacturers M
+    ON P.Manufacturer = M.Code
+    GROUP BY 
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the names of manufacturer whose products have an average price larger than or equal to $150.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
 
 render('main', ['exercises' => $exercises]);
