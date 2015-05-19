@@ -14,7 +14,11 @@
                 <tbody>
                     {% for row in ex.rows %}
                         <tr>
-                            <td>{{ row.Name }}</td>
+                            {% for cell in row %}
+                                <td>
+                                    {{ cell }}
+                                </td>
+                            {% endfor %}
                         </tr>
                     {% endfor %}
                 </tbody>
