@@ -32,4 +32,144 @@ $exercises[] = $ex;
 
 /******************************************/
 
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT Name, Price 
+    FROM Products
+    WHERE Price <= 200
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the name of the products with a price less than or equal to $200.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT Name, Price 
+    FROM Products
+    WHERE Price BETWEEN 60 AND 120
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select all the products with a price between $60 and $120.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT Name, Price * 100 AS "Price in cents"
+    FROM Products
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the name and price in cents (i.e., the price must be multiplied by 100).',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT AVG(Price) AS "Average Price"
+    FROM Products
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Compute the average price of all the products.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT AVG(Price) AS "Average Price"
+    FROM Products
+    WHERE Manufacturer = 2
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Compute the average price of all products with manufacturer code equal to 2.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT COUNT(*)
+    FROM Products
+    WHERE Price >= 180
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Compute the number of products with a price larger than or equal to $180.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT Name, Price
+    FROM Products
+    WHERE Price >= 180
+    ORDER BY Price DESC, Name ASC
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name (in ascending order).',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+
 render('main', ['exercises' => $exercises]);
