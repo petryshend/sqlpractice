@@ -273,5 +273,45 @@ $exercises[] = $ex;
 
 /******************************************/
 
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT Name, MIN(Price)
+    FROM Products
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the name and price of the cheapest product.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
+$stmt = $conn->prepare(
+    <<<'SQL'
+    SELECT M.Name AS Manufacturer, P.Name, MAX(P.Price)
+    FROM Products P JOIN Manufacturers M
+    ON P.Manufacturer = M.Code
+    GROUP BY M.Name
+SQL
+);
+
+$stmt->execute();
+$rows = $stmt->fetchAll(); 
+
+$ex = [
+    'task' => 'Select the name of each manufacturer along with the name and price of its most expensive product.',
+    'rows' => $rows,
+];
+
+$exercises[] = $ex;
+
+/******************************************/
+
 
 render('main', ['exercises' => $exercises]);
