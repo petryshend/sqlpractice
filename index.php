@@ -257,7 +257,7 @@ $stmt = $conn->prepare(
     SELECT AVG(Price), M.Name
     FROM Products P JOIN Manufacturers M
     ON P.Manufacturer = M.Code
-    GROUP BY 
+    GROUP BY Manufacturer
 SQL
 );
 
